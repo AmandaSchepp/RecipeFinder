@@ -29,38 +29,38 @@ fun SearchComponent(onSearchClicked: (query: String) -> Unit){
             .fillMaxWidth()
             .padding(horizontal = 8.dp)
         ){
-            OutlinedTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color.White),
-                value = query,
-                onValueChange = {
-                    if (it.isNotBlank()) {
-                        errorMessage = ""
-                    }
-                    query = it
-                },
-                label = { Text("Search") },
-                singleLine = true,
-                isError = errorMessage.isNotBlank(),
-                trailingIcon = {
-                    IconButton(
-                        onClick = {
-                            if (query.isNotBlank()){
-                                onSearchClicked(query)
-                            } else {
-                                errorMessage = "Enter something above"
-                            }
-                        }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Search,
-                            contentDescription = "Clear",
-                            tint = Color.Gray
-                        )
-                    }
-                }
-        )
+            //OutlinedTextField(
+                //modifier = Modifier
+                   // .fillMaxWidth()
+                 //   .background(Color.White),
+               // value = query,
+                //onValueChange = {
+                    //if (it.isNotBlank()) {
+                      //  errorMessage = ""
+                    //}
+                  //  query = it
+                //},
+                //label = { Text("Search") },
+                //singleLine = true,
+                //isError = errorMessage.isNotBlank(),
+              //  trailingIcon = {
+                  //  IconButton(
+                        //onClick = {
+                            //if (query.isNotBlank()){
+                             //   onSearchClicked(query)
+                           // } else {
+                         //       errorMessage = "Enter something above"
+                       //     }
+                     //   }
+                   // ) {
+                      //  Icon(
+                    //        imageVector = Icons.Default.Search,
+                  //          contentDescription = "Clear",
+                //            tint = Color.Gray
+              //          )
+            //        }
+          //      }
+        //)
         if (errorMessage.isNotBlank()){
             Text(
                 text = errorMessage,

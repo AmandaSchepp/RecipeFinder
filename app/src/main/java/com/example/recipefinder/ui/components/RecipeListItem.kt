@@ -12,6 +12,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -33,15 +34,16 @@ import coil.compose.AsyncImage
 import com.example.recipefinder.data.model.Meal
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun RecipeListItem(meal: Meal){
     var expanded by remember{ mutableStateOf(false) }
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(8.dp),
                 shape = RoundedCornerShape(4.dp),
-        border = BorderStroke(1.dp, Color.LightGray)
+        border = BorderStroke(1.dp, Color.LightGray),
                 colors = CardDefault.cardColors(
                 Color.White
                 )

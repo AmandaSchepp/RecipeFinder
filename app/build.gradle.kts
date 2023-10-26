@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    kotlin("plugin.serialization") version "1.8.20"
+
 }
 
 android {
@@ -61,6 +61,8 @@ dependencies {
     implementation("android.compose.vi:vi-tooling-preview")
     implementation("android.compose.material3:material3:1.1.1")
     implementation ("androidx.compose.material3:material3:1.0.0-alpha04")
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("android.test.ext:junit:1.1.5")
     androidTestImplementation("androidx. test. espresso: espresso-core:3.5.1")
