@@ -1,13 +1,11 @@
 package com.example.recipefinder.data.model
-
-
 import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Meal(
     @SerializedName("dateModified")
-    val dateModified: Any,
+    val dateModified: String?,
     @SerializedName("idMeal")
     val idMeal: String?,
     @SerializedName("strArea")
@@ -15,11 +13,11 @@ data class Meal(
     @SerializedName("strCategory")
     val strCategory: String?,
     @SerializedName("strCreativeCommonsConfirmed")
-    val strCreativeCommonsConfirmed: Any,
+    val strCreativeCommonsConfirmed: String?,
     @SerializedName("strDrinkAlternate")
-    val strDrinkAlternate: Any,
+    val strDrinkAlternate: String?,
     @SerializedName("strImageSource")
-    val strImageSource: Any,
+    val strImageSource: String?,
     @SerializedName("strIngredient1")
     val strIngredient1: String?,
     @SerializedName("strIngredient10")
@@ -111,5 +109,5 @@ data class Meal(
     @SerializedName("strTags")
     val strTags: String?,
     @SerializedName("strYoutube")
-    val strYoutube: String?
+    val strYoutube: String
 )
