@@ -37,13 +37,14 @@ fun RecipeListItem(meal: Meal) {
     var expanded by remember { mutableStateOf(false) }
 
     Card(
+        // The following code handles the background card that displays th recipies ingredients.
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
         shape = RoundedCornerShape(4.dp),
         border = BorderStroke(1.dp, Color.LightGray),
         colors = CardDefaults.cardColors(
-            Color(0xFFd7edc7)
+            Color(0xFFd7edc7) // Assigns a light green color to the card.
         )
     ) {
         Column(
