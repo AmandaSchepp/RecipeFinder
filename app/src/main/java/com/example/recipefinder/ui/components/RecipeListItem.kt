@@ -71,6 +71,7 @@ fun RecipeListItem(meal: Meal) {
             )
             Spacer(modifier = Modifier.padding(8.dp))
             Text(
+                // Adds the heading "Instructions" to the top of the instructions section
                 text = "Ingredients",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.SemiBold
