@@ -37,7 +37,7 @@ fun RecipeListItem(meal: Meal) {
     var expanded by remember { mutableStateOf(false) }
 
     Card(
-        // The following code handles the background card that displays th recipies ingredients.
+        // The following code handles the background card that displays th recipes ingredients.
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
@@ -81,6 +81,7 @@ fun RecipeListItem(meal: Meal) {
             Spacer(modifier = Modifier.padding(8.dp))
 
             AnimatedVisibility(visible = expanded) {
+                // The Following code handles the drop down that displays the instructions for the recipes.
                 Column {
                     Text(
                         text = "Instructions",
@@ -88,6 +89,7 @@ fun RecipeListItem(meal: Meal) {
                         fontWeight = FontWeight.SemiBold
                     )
                     Text(
+                        // This is the actual instructions that were pulled from the API
                         text = meal.strInstructions ?: ""
                     )
                 }
