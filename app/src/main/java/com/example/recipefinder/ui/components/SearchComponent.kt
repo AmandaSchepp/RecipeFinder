@@ -57,7 +57,7 @@ fun SearchComponent(onSearchClicked: (query: String) -> Unit) {
                     Icon(
                         imageVector = Icons.Default.Search,
                         contentDescription = "Clear",
-                        tint = Color.Gray
+                        tint = Color.Black
                     )
                 }
             }

@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 @Composable
 fun RecipesList(recipes: List<Meal>) {
     LazyColumn(
-        modifier = Modifier.fillMaxSize().background(Color.White)
+        modifier = Modifier.fillMaxSize().background(Color.Cyan)
     ){
         items(recipes) {
             RecipeListItem(it)

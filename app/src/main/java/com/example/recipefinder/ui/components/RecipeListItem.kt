@@ -33,21 +33,23 @@ import coil.compose.AsyncImage
 import com.example.recipefinder.data.model.Meal
 
 @Composable
-fun RecipeListItem(meal: Meal){
-    var expanded by remember{ mutableStateOf(false) }
+fun RecipeListItem(meal: Meal) {
+    var expanded by remember { mutableStateOf(false) }
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
-                shape = RoundedCornerShape(4.dp),
+        shape = RoundedCornerShape(4.dp),
         border = BorderStroke(1.dp, Color.LightGray),
-                colors = CardDefaults.cardColors(Color.LightGray)
+        colors = CardDefaults.cardColors(
+            Color.White
+        )
     ) {
         Column(
             modifier = Modifier.padding(8.dp)
-        ){
-            if (!meal.strMealThumb.isNullOrEmpty()){
+        ) {
+            if (!meal.strMealThumb.isNullOrEmpty()) {
                 AsyncImage(
                     model = meal.strMealThumb,
                     contentDescription = "thumbnail",
@@ -85,35 +87,37 @@ fun RecipeListItem(meal: Meal){
                         fontWeight = FontWeight.SemiBold
                     )
                     Text(
-                        text = meal.strInstructions?: ""
+                        text = meal.strInstructions ?: ""
                     )
-                }
-                Column(
-                    modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .clickable {
-                            expanded = !expanded
-                        }) {
-                    Icon(
-                        imageVector = if (expanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
-                        contentDescription = "Clear",
-                        modifier = Modifier
-                            .align(
-                                Alignment.CenterHorizontally
-                            )
-                    )
-
                 }
             }
+            Column(
+                modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        expanded = !expanded
+                    }) {
+                Icon(
+                    imageVector = if (expanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                    contentDescription = "Clear",
+                    tint = Color.Black,
+                    modifier = Modifier
+                        .align(
+                            Alignment.CenterHorizontally
+                        )
+
+                )
+            }
+
         }
     }
 }
 
-fun getIngredients(meal: Meal): String{
+fun getIngredients(meal: Meal): String {
     var ingredients = ""
 
-    with(meal){
+    with(meal) {
         if (!strIngredient1.isNullOrEmpty()) ingredients += "$strIngredient1 - $strMeasure1\n"
         if (!strIngredient2.isNullOrEmpty()) ingredients += "$strIngredient2 - $strMeasure2\n"
         if (!strIngredient3.isNullOrEmpty()) ingredients += "$strIngredient3 - $strMeasure3\n"
@@ -126,11 +130,11 @@ fun getIngredients(meal: Meal): String{
         if (!strIngredient10.isNullOrEmpty()) ingredients += "$strIngredient10 - $strMeasure10\n"
         if (!strIngredient11.isNullOrEmpty()) ingredients += "$strIngredient11 - $strMeasure11\n"
         if (!strIngredient12.isNullOrEmpty()) ingredients += "$strIngredient12 - $strMeasure12\n"
-        if (!strIngredient13.isNullOrEmpty()) ingredients += "$strIngredient13- $strMeasure13\n"
+        if (!strIngredient13.isNullOrEmpty()) ingredients += "$strIngredient13 - $strMeasure13\n"
         if (!strIngredient14.isNullOrEmpty()) ingredients += "$strIngredient14 - $strMeasure14\n"
         if (!strIngredient15.isNullOrEmpty()) ingredients += "$strIngredient15 - $strMeasure15\n"
         if (!strIngredient16.isNullOrEmpty()) ingredients += "$strIngredient16 - $strMeasure16\n"
-        if (!strIngredient17.isNullOrEmpty()) ingredients += "$strIngredient17- $strMeasure17\n"
+        if (!strIngredient17.isNullOrEmpty()) ingredients += "$strIngredient17 - $strMeasure17\n"
         if (!strIngredient18.isNullOrEmpty()) ingredients += "$strIngredient18 - $strMeasure18\n"
         if (!strIngredient19.isNullOrEmpty()) ingredients += "$strIngredient19 - $strMeasure19\n"
         if (!strIngredient20.isNullOrEmpty()) ingredients += "$strIngredient20 - $strMeasure20\n"
