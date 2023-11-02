@@ -12,16 +12,16 @@ import androidx.compose.ui.unit.sp
 import com.example.recipefinder.data.model.Meal
 
 @Composable
-fun SuccessComponent(recipes: List<Meal>, onSearchClicked: (query: String)-> Unit){
+fun SuccessComponent(recipes: List<Meal>, onSearchClicked: (query: String) -> Unit) {
     Column {
         Text(
-            text = "Zan Recipe Finder",
-            fontWeight = FontWeight(weight = 900),
+            text = "Recipe Finder",
+            fontWeight = FontWeight(900),
             fontFamily = FontFamily.Cursive,
             fontSize = 32.sp,
             modifier = Modifier.padding(8.dp)
         )
         SearchComponent(onSearchClicked = onSearchClicked)
-        RecipeList(recipes = recipes)
+        RecipesList(recipes = recipes)
     }
 }

@@ -1,4 +1,5 @@
 package com.example.recipefinder.ui.components
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

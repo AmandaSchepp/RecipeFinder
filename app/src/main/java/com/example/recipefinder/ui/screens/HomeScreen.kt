@@ -14,7 +14,7 @@ import com.example.recipefinder.ui.viewmodel.RecipeViewState
 fun HomeScreen(recipeViewModel: RecipeViewModel) {
     val state by recipeViewModel.state
 
-    when(state){
+    when(state) {
         is RecipeViewState.Loading -> LoadingComponent()
         is RecipeViewState.Success -> {
             val recipes = (state as RecipeViewState.Success).recipes
@@ -24,13 +24,13 @@ fun HomeScreen(recipeViewModel: RecipeViewModel) {
         }
         is RecipeViewState.Error -> {
             val message = (state as RecipeViewState.Error).message
-            ErrorComponent(message = message){
+            ErrorComponent(message = message, onRefreshClicked = {
                 recipeViewModel.processIntent(RecipeViewIntent.LoadRandomRecipe)
-            }
+            })
         }
     }
 
-    LaunchedEffect(Unit){
+    LaunchedEffect(Unit) {
         recipeViewModel.processIntent(RecipeViewIntent.LoadRandomRecipe)
     }
 }
