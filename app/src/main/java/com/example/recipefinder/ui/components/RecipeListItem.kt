@@ -43,7 +43,7 @@ fun RecipeListItem(meal: Meal) {
         shape = RoundedCornerShape(4.dp),
         border = BorderStroke(1.dp, Color.LightGray),
         colors = CardDefaults.cardColors(
-            Color.White
+            Color(0xFFd7edc7)
         )
     ) {
         Column(
