@@ -102,6 +102,7 @@ fun RecipeListItem(meal: Meal) {
                         expanded = !expanded
                     }) {
                 Icon(
+                    // This is the arrow icon for the dropdown to display the instructions.
                     imageVector = if (expanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
                     contentDescription = "Clear",
                     tint = Color.Black,
