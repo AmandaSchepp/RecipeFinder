@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">RecipeFinder</string>
+    <string name="app_name">RecipEase</string>
+    <string name="web_client_id">936381057486-28etmppdqvutpkr7moh1qep57hks6lve.apps.googleusercontent.com</string>
 </resources>
