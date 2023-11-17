@@ -96,19 +96,5 @@ fun SuccessComponent(
             SearchComponent(onSearchClicked = onSearchClicked)
             RecipesList(recipes = recipes)
         }
-
-        Button(
-            onClick = onSignOut,
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .padding(16.dp)
-                .size(56.dp)
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_sign_out),
-                contentDescription = "Sign Out",
-                modifier = Modifier.fillMaxSize().scale(3f)
-            )
-        }
     }
 }
