@@ -25,7 +25,8 @@ fun HamburgerMenuComponent(
     onSignOut: () -> Unit
 ) {
     // Hamburger menu icon
-    IconButton(onClick = { expanded.value = !expanded.value }) {
+    IconButton(onClick = { expanded.value = !expanded.value },
+        modifier = Modifier.padding(start = 350.dp, top = 16.dp)) {
         Icon(imageVector = Icons.Default.Menu, contentDescription = "Menu")
     }
 
@@ -33,7 +34,7 @@ fun HamburgerMenuComponent(
     if (expanded.value) {
         Box(
             modifier = Modifier
-                .padding(8.dp) // Adjust padding as needed
+                .padding(start = 315.dp) // Adjust padding as needed
                 .background(colorScheme.surface)
         ) {
             // Sign Out button in the menu
