@@ -10,7 +10,6 @@ import com.example.recipefinder.sign_in.UserData
 import com.example.recipefinder.ui.components.LoadingComponent
 import com.example.recipefinder.ui.components.SuccessComponent
 import com.example.recipefinder.ui.components.ErrorComponent
-import com.example.recipefinder.ui.components.HamburgerMenuComponent
 import com.example.recipefinder.ui.viewmodel.RecipeViewIntent
 import com.example.recipefinder.ui.viewmodel.RecipeViewModel
 import com.example.recipefinder.ui.viewmodel.RecipeViewState
@@ -29,12 +28,13 @@ fun HomeScreen(
         is RecipeViewState.Success -> {
             val recipes = (state as RecipeViewState.Success).recipes
             Column {
-                HamburgerMenuComponent(expandedState, userData, onSignOut)
+                ///HamburgerMenuComponent(expandedState, userData, onSignOut)
                 SuccessComponent(
                     recipes = recipes,
                     onSearchClicked = { query ->
                         recipeViewModel.processIntent(RecipeViewIntent.SearchRecipes(query))
                     },
+                    expanded = expandedState, // Pass the 'expandedState' as an argument
                     userData = userData,
                     onSignOut = onSignOut
                 )
