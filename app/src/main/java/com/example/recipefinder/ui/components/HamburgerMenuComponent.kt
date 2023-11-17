@@ -25,7 +25,7 @@ fun HamburgerMenuComponent(
     onSignOut: () -> Unit
 ) {
     // Hamburger menu icon
-    IconButton(onClick = { expanded.value = true }) {
+    IconButton(onClick = { expanded.value = !expanded.value }) {
         Icon(imageVector = Icons.Default.Menu, contentDescription = "Menu")
     }
 
