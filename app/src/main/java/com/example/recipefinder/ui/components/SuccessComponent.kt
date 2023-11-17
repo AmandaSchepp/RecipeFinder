@@ -2,6 +2,7 @@ package com.example.recipefinder.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,9 +11,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,23 +40,21 @@ import com.example.recipefinder.sign_in.UserData
 fun SuccessComponent(
     recipes: List<Meal>,
     onSearchClicked: (query: String) -> Unit,
+    expanded: MutableState<Boolean>,
     userData: UserData?,
     onSignOut: () -> Unit
 ) {
-    Box (
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                color = Color.White
-            )
+            .background(color = Color.White)
     ) {
         Column {
+            // Header Row
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(
-                        color = Color.White
-                    ),
+                    .background(color = Color.White),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
@@ -63,7 +68,7 @@ fun SuccessComponent(
                     )
                 )
 
-                if(userData?.username != null) {
+                if (userData?.username != null) {
                     Text(
                         text = userData.username,
                         textAlign = TextAlign.Right,
@@ -71,7 +76,7 @@ fun SuccessComponent(
                         modifier = Modifier
                             .padding(
                                 top = 5.dp,
-                                start = 110.dp,
+                                start = 50.dp,
                                 end = 10.dp
                             ),
                         fontWeight = FontWeight.SemiBold
@@ -83,7 +88,7 @@ fun SuccessComponent(
                         model = userData.profilePictureUrl,
                         contentDescription = "Profile picture",
                         modifier = Modifier
-                            .size(45.dp)
+                            .size(35.dp)
                             .padding(
                                 top = 5.dp,
                                 end = 5.dp
@@ -91,24 +96,42 @@ fun SuccessComponent(
                             .clip(CircleShape)
                     )
                 }
+
+                // Hamburger menu icon
+                IconButton(onClick = { expanded.value = !expanded.value },
+                    modifier = Modifier.padding(start = 10.dp, top = 10.dp)) {
+                    Icon(imageVector = Icons.Default.Menu, contentDescription = "Menu")
+                }
+            }
+
+            // Hamburger menu content
+            if (expanded.value) {
+                Box(
+                    modifier = Modifier
+                        .padding(start = 10.dp, top = 5.dp) // Adjust padding as needed
+                        .background(MaterialTheme.colorScheme.surface)
+                ) {
+                    // Sign Out button in the menu
+                    if (userData != null) {
+                        Box(
+                            modifier = Modifier
+                                .padding(5.dp) // Add padding to the box
+                                .clickable {
+                                    expanded.value = false
+                                    onSignOut()
+                                }
+                        ) {
+                            Text(
+                                text = "Sign Out",
+                                modifier = Modifier.padding(start = 285.dp ) // Add padding to the text
+                            )
+                        }
+                    }
+                }
             }
 
             SearchComponent(onSearchClicked = onSearchClicked)
             RecipesList(recipes = recipes)
-        }
-
-        Button(
-            onClick = onSignOut,
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .padding(16.dp)
-                .size(56.dp)
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_sign_out),
-                contentDescription = "Sign Out",
-                modifier = Modifier.fillMaxSize().scale(3f)
-            )
         }
     }
 }
