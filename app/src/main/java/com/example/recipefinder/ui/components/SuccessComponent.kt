@@ -109,21 +109,58 @@ fun SuccessComponent(
                 Box(
                     modifier = Modifier
                         .padding(start = 10.dp, top = 5.dp) // Adjust padding as needed
-                        .background(MaterialTheme.colorScheme.surface)
+                        .background(Color.White)
                 ) {
-                    // Sign Out button in the menu
                     if (userData != null) {
+                        // Home menu text link
                         Box(
                             modifier = Modifier
-                                .padding(5.dp) // Add padding to the box
+                                .padding(5.dp)
+                                .clickable {
+
+                                }
+                        ) {
+                            Text(
+                                text = "\uD83C\uDFE0 Home"
+                            )
+                        }
+                        // Timer menu text link
+                        Box(
+                            modifier = Modifier
+                                .padding(start = 85.dp, end = 5.dp, top = 5.dp, bottom = 5.dp)
+                                .clickable {
+
+                                }
+                        ) {
+                            Text(
+                                text = "⏲️ Timer"
+                            )
+                        }
+                        // Notes menu text link
+                        Box(
+                            modifier = Modifier
+                                .padding(start = 165.dp, end = 5.dp, top = 5.dp, bottom = 5.dp)
+                                .clickable {
+
+                                }
+                        ) {
+                            Text(
+                                text = "\uD83D\uDDD2️ Notes"
+                            )
+                        }
+                        // Sign out menu text link
+                        Box(
+                            modifier = Modifier
+                                .padding(start = 245.dp, end = 5.dp, top = 5.dp, bottom = 5.dp)
                                 .clickable {
                                     expanded.value = false
                                     onSignOut()
                                 }
                         ) {
                             Text(
-                                text = "Sign Out",
-                                modifier = Modifier.padding(start = 285.dp ) // Add padding to the text
+                                text = "\uD83D\uDEAA Sign Out",
+                                color = Color.Red
+
                             )
                         }
                     }
