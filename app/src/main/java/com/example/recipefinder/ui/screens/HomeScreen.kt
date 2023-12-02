@@ -6,6 +6,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.navigation.NavController
 import com.example.recipefinder.sign_in.UserData
 import com.example.recipefinder.ui.components.LoadingComponent
 import com.example.recipefinder.ui.components.SuccessComponent
@@ -18,7 +19,8 @@ import com.example.recipefinder.ui.viewmodel.RecipeViewState
 fun HomeScreen(
     recipeViewModel: RecipeViewModel,
     userData: UserData?,
-    onSignOut: () -> Unit
+    onSignOut: () -> Unit,
+    navController: NavController
 ) {
     val state by recipeViewModel.state
     val expandedState = remember { mutableStateOf(false) }
@@ -36,7 +38,11 @@ fun HomeScreen(
                     },
                     expanded = expandedState, // Pass the 'expandedState' as an argument
                     userData = userData,
-                    onSignOut = onSignOut
+                    onSignOut = onSignOut,
+                    onNotesClicked = {
+                        // Handle navigation to the "notes" destination
+                        navController.navigate("notes")
+                    }
                 )
             }
         }
