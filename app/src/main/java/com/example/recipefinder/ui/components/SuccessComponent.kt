@@ -37,7 +37,8 @@ fun SuccessComponent(
     expanded: MutableState<Boolean>,
     userData: UserData?,
     onSignOut: () -> Unit,
-    onNotesClicked: () -> Unit
+    onNotesClicked: () -> Unit,
+    onRefreshClicked: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -112,17 +113,17 @@ fun SuccessComponent(
                             modifier = Modifier
                                 .padding(5.dp)
                                 .clickable {
-
+                                    onRefreshClicked()
                                 }
                         ) {
                             Text(
-                                text = "\uD83C\uDFE0 Home"
+                                text = "\uD83D\uDD04 Refresh"
                             )
                         }
                         // Timer menu text link
                         Box(
                             modifier = Modifier
-                                .padding(start = 85.dp, end = 5.dp, top = 5.dp, bottom = 5.dp)
+                                .padding(start = 95.dp, end = 5.dp, top = 5.dp, bottom = 5.dp)
                                 .clickable {
 
                                 }
@@ -134,7 +135,7 @@ fun SuccessComponent(
                         // Notes menu text link
                         Box(
                             modifier = Modifier
-                                .padding(start = 165.dp, end = 5.dp, top = 5.dp, bottom = 5.dp)
+                                .padding(start = 170.dp, end = 5.dp, top = 5.dp, bottom = 5.dp)
                                 .clickable {
                                     onNotesClicked()
                                 }
