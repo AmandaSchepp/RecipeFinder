@@ -25,6 +25,11 @@ fun HomeScreen(
     val state by recipeViewModel.state
     val expandedState = remember { mutableStateOf(false) }
 
+    // Callback function for refreshing the screen
+    val onRefreshClicked: () -> Unit = {
+        recipeViewModel.processIntent(RecipeViewIntent.LoadRandomRecipe)
+    }
+
     when (state) {
         is RecipeViewState.Loading -> LoadingComponent()
         is RecipeViewState.Success -> {
@@ -42,7 +47,8 @@ fun HomeScreen(
                     onNotesClicked = {
                         // Handle navigation to the "notes" destination
                         navController.navigate("notes")
-                    }
+                    },
+                    onRefreshClicked = onRefreshClicked
                 )
             }
         }
