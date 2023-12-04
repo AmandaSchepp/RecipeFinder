@@ -1,5 +1,6 @@
 package com.example.recipefinder
 
+import TimerScreen
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -128,6 +129,11 @@ class MainActivity : ComponentActivity() {
                         }
                         composable("notes") {
                             NotesScreen(onBackClicked = {
+                                navController.popBackStack()
+                            }, notesViewModel = notesViewModel)
+                        }
+                        composable("timer") {
+                            TimerScreen(onBackClicked = {
                                 navController.popBackStack()
                             }, notesViewModel = notesViewModel)
                         }

@@ -48,6 +48,9 @@ fun HomeScreen(
                         // Handle navigation to the "notes" destination
                         navController.navigate("notes")
                     },
+                    onTimerClicked = {
+                        navController.navigate("timer")
+                    },
                     onRefreshClicked = onRefreshClicked
                 )
             }
