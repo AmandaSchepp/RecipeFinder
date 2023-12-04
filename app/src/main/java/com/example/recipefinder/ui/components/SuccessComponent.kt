@@ -38,6 +38,7 @@ fun SuccessComponent(
     userData: UserData?,
     onSignOut: () -> Unit,
     onNotesClicked: () -> Unit,
+    onTimerClicked: () -> Unit,
     onRefreshClicked: () -> Unit
 ) {
     Box(
@@ -125,7 +126,7 @@ fun SuccessComponent(
                             modifier = Modifier
                                 .padding(start = 95.dp, end = 5.dp, top = 5.dp, bottom = 5.dp)
                                 .clickable {
-
+                                    onTimerClicked()
                                 }
                         ) {
                             Text(
