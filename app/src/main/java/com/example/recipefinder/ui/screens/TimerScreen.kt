@@ -1,11 +1,12 @@
-import android.os.Bundle
+package com.example.recipefinder.ui.screens
+
+import android.media.MediaPlayer
 import android.os.CountDownTimer
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -19,15 +20,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.recipefinder.NotesViewModel
+import com.example.recipefinder.R
 
+// Composable function representing the timer screen
 @Composable
-fun TimerScreen(  onBackClicked: () -> Unit, notesViewModel: NotesViewModel = viewModel()) {
+fun TimerScreen(
+    onBackClicked: () -> Unit,
+    notesViewModel: NotesViewModel = viewModel()
+) {
+    // State for managing input of minutes and seconds
     var inputMinutes by remember { mutableStateOf("1") }
     var inputSeconds by remember { mutableStateOf("0") }
+
+    // State for managing timer-related states
     var isTimerRunning by remember { mutableStateOf(false) }
     var timeLeftInSeconds by remember { mutableStateOf(0) }
     var isTimerFinished by remember { mutableStateOf(false) }
 
+    // LaunchedEffect for updating the timer display when the timer is running
     LaunchedEffect(isTimerRunning) {
         if (isTimerRunning) {
             object : CountDownTimer(timeLeftInSeconds * 1000L, 1000) {
@@ -43,8 +53,10 @@ fun TimerScreen(  onBackClicked: () -> Unit, notesViewModel: NotesViewModel = vi
         }
     }
 
-    // Show a Toast when the timer finishes
+    // Show a Toast and play an alarm sound when the timer finishes
     if (isTimerFinished) {
+        val mp: MediaPlayer = MediaPlayer.create(LocalContext.current, R.raw.alarm_sound)
+        mp.start()
         Toast.makeText(
             LocalContext.current,
             "Timer finished!",
@@ -53,6 +65,7 @@ fun TimerScreen(  onBackClicked: () -> Unit, notesViewModel: NotesViewModel = vi
         isTimerFinished = false
     }
 
+    // Column composable for arranging UI elements vertically
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -63,7 +76,7 @@ fun TimerScreen(  onBackClicked: () -> Unit, notesViewModel: NotesViewModel = vi
         Box(
             modifier = Modifier
                 .padding(start = 140.dp)
-                .background(Color.White)
+                .background(MaterialTheme.colorScheme.background)
                 .clickable {
                     // Start or stop the timer on click
                     isTimerRunning = !isTimerRunning
@@ -72,6 +85,7 @@ fun TimerScreen(  onBackClicked: () -> Unit, notesViewModel: NotesViewModel = vi
             val minutes = timeLeftInSeconds / 60
             val seconds = timeLeftInSeconds % 60
 
+            // Text composable to display the countdown timer
             Text(
                 text = "$minutes:${"%02d".format(seconds)}", // Format as "minutes:seconds"
                 modifier = Modifier.padding(16.dp),
@@ -82,6 +96,7 @@ fun TimerScreen(  onBackClicked: () -> Unit, notesViewModel: NotesViewModel = vi
                 )
             )
         }
+
         // Timer input fields with labels
         Row(
             modifier = Modifier

@@ -20,22 +20,29 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
+// Composable function representing a search component
 @Composable
 fun SearchComponent(onSearchClicked: (query: String) -> Unit) {
+    // State to manage the query entered by the user
     var query by remember { mutableStateOf("") }
+
+    // State to manage error messages related to search
     var errorMessage by remember { mutableStateOf("") }
 
+    // Column layout to vertically arrange the content
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 8.dp)
     ) {
+        // OutlinedTextField for user input
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.White),
             value = query,
             onValueChange = {
+                // Clear error message if the user is entering a new query
                 if (it.isNotBlank()) {
                     errorMessage = ""
                 }
@@ -43,25 +50,31 @@ fun SearchComponent(onSearchClicked: (query: String) -> Unit) {
             },
             label = { Text("Search") },
             singleLine = true,
+            // Set isError flag based on whether there's an error message
             isError = errorMessage.isNotBlank(),
             trailingIcon = {
+                // IconButton for triggering the search
                 IconButton(
                     onClick = {
+                        // Check if the query is not blank before triggering the search
                         if (query.isNotBlank()) {
                             onSearchClicked(query)
                         } else {
+                            // Display an error message if the query is blank
                             errorMessage = "Enter a query first"
                         }
                     }
                 ) {
+                    // Search icon
                     Icon(
                         imageVector = Icons.Default.Search,
-                        contentDescription = "Clear",
+                        contentDescription = "Search",
                         tint = Color.Black
                     )
                 }
             }
         )
+        // Display the error message if present
         if (errorMessage.isNotBlank()) {
             Text(
                 text = errorMessage,
