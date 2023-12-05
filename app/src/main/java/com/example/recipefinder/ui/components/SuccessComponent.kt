@@ -30,6 +30,7 @@ import coil.compose.AsyncImage
 import com.example.recipefinder.data.model.Meal
 import com.example.recipefinder.sign_in.UserData
 
+// Composable function representing a success screen with recipes
 @Composable
 fun SuccessComponent(
     recipes: List<Meal>,
@@ -41,6 +42,7 @@ fun SuccessComponent(
     onTimerClicked: () -> Unit,
     onRefreshClicked: () -> Unit
 ) {
+    // Main Box layout to fill the entire size and set the background color
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -54,6 +56,7 @@ fun SuccessComponent(
                     .background(color = Color.White),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                // App title
                 Text(
                     text = "RecipEase",
                     fontWeight = FontWeight(900),
@@ -65,6 +68,7 @@ fun SuccessComponent(
                     )
                 )
 
+                // Display username if available
                 if (userData?.username != null) {
                     Text(
                         text = userData.username,
@@ -80,6 +84,7 @@ fun SuccessComponent(
                     )
                 }
 
+                // Display profile picture if available
                 if (userData?.profilePictureUrl != null) {
                     AsyncImage(
                         model = userData.profilePictureUrl,
@@ -157,14 +162,16 @@ fun SuccessComponent(
                             Text(
                                 text = "\uD83D\uDEAA Sign Out",
                                 color = Color.Red
-
                             )
                         }
                     }
                 }
             }
 
+            // Search component
             SearchComponent(onSearchClicked = onSearchClicked)
+
+            // List of recipes
             RecipesList(recipes = recipes)
         }
     }

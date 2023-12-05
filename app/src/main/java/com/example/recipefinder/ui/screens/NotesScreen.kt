@@ -37,42 +37,55 @@ import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
+// Composable function representing the notes screen
 @Composable
 fun NotesScreen(
     onBackClicked: () -> Unit,
     notesViewModel: NotesViewModel = viewModel()
 ) {
+    // State for managing the text of the new note
     var newNoteText by remember { mutableStateOf("") }
+
+    // State for managing the list of notes
     var notes by remember { mutableStateOf<List<Note>>(emptyList()) }
+
+    // Coroutine scope for performing asynchronous operations
     val coroutineScope = rememberCoroutineScope()
 
+    // Use DisposableEffect to perform an action when the composable is first created and dispose of resources when it's removed
     DisposableEffect(notesViewModel) {
         coroutineScope.launch {
             withContext(Dispatchers.IO) {
+                // Fetch the list of notes from the ViewModel
                 notes = notesViewModel.getNotes()
             }
         }
 
+        // Dispose of the coroutine scope when the composable is disposed
         onDispose {
             coroutineScope.cancel()
         }
     }
 
+    // Column composable for arranging UI elements vertically
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Display existing notes
+        // Display existing notes using LazyColumn
         LazyColumn(
             modifier = Modifier.weight(1f),
             content = {
+                // Iterate over the list of notes
                 items(notes) { note ->
+                    // Box composable for creating a container with a background color
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 8.dp)
                     ) {
+                        // Row composable for arranging UI elements horizontally
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -81,18 +94,19 @@ fun NotesScreen(
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            // Text with weight
+                            // Text composable to display the content of the note
                             Text(
                                 text = note.content,
                                 modifier = Modifier.weight(1f)
                             )
 
-                            // Delete icon with fixed width
+                            // IconButton composable for displaying the delete icon
                             IconButton(
                                 onClick = {
+                                    // Perform delete operation when the delete icon is clicked
                                     coroutineScope.launch {
                                         withContext(Dispatchers.IO) {
-                                            // Delete the note from Firestore
+                                            // Delete the note from Firestore using the ViewModel
                                             notesViewModel.deleteNote(note)
                                             // Update the list of notes
                                             notes = notesViewModel.getNotes()
@@ -142,8 +156,11 @@ fun NotesScreen(
                     if (newNoteText.isNotBlank()) {
                         coroutineScope.launch {
                             withContext(Dispatchers.IO) {
+                                // Add a new note to Firestore using the ViewModel
                                 notesViewModel.addNote(newNoteText)
+                                // Update the list of notes
                                 notes = notesViewModel.getNotes()
+                                // Clear the text field after creating the note
                                 newNoteText = ""
                             }
                         }
@@ -158,7 +175,6 @@ fun NotesScreen(
         }
     }
 }
-
 
 
 

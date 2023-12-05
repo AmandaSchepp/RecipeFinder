@@ -13,12 +13,15 @@ import com.google.firebase.auth.auth
 import kotlinx.coroutines.tasks.await
 import java.util.concurrent.CancellationException
 
+// Class responsible for managing Google authentication using One Tap API
 class GoogleAuthUIClient (
     private val context: Context,
     private val oneTapClient: SignInClient
 ) {
+    // Firebase authentication instance
     private val auth = Firebase.auth
 
+    // Function to initiate the Google sign-in process and return the IntentSender for further processing
     suspend fun signIn(): IntentSender? {
         val result = try {
             oneTapClient.beginSignIn(
@@ -32,6 +35,7 @@ class GoogleAuthUIClient (
         return result?.pendingIntent?.intentSender
     }
 
+    // Function to handle the result of the Google sign-in Intent and return a SignInResult
     suspend fun signInWithIntent(intent: Intent): SignInResult {
         val credential = oneTapClient.getSignInCredentialFromIntent(intent)
         val googleIdToken = credential.googleIdToken
@@ -59,6 +63,7 @@ class GoogleAuthUIClient (
         }
     }
 
+    // Function to sign the user out of the application
     suspend fun signOut() {
         try {
             oneTapClient.signOut().await()
@@ -69,6 +74,7 @@ class GoogleAuthUIClient (
         }
     }
 
+    // Function to retrieve information about the currently signed-in user
     fun getSignedInUser(): UserData? = auth.currentUser?.run {
         UserData(
             userId = uid,
@@ -77,6 +83,7 @@ class GoogleAuthUIClient (
         )
     }
 
+    // Function to build the request for the Google sign-in process
     private fun buildSignInRequest(): BeginSignInRequest {
         return BeginSignInRequest.Builder()
             .setGoogleIdTokenRequestOptions(
