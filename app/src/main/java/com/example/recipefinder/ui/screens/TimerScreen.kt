@@ -1,11 +1,11 @@
-import android.os.Bundle
+
+import android.media.MediaPlayer
 import android.os.CountDownTimer
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.recipefinder.NotesViewModel
+import com.example.recipefinder.R
 
 @Composable
 fun TimerScreen(  onBackClicked: () -> Unit, notesViewModel: NotesViewModel = viewModel()) {
@@ -43,8 +44,10 @@ fun TimerScreen(  onBackClicked: () -> Unit, notesViewModel: NotesViewModel = vi
         }
     }
 
-    // Show a Toast when the timer finishes
+    // Show a Toast and play an alarm sound when the timer finishes
     if (isTimerFinished) {
+        val mp: MediaPlayer = MediaPlayer.create(LocalContext.current, R.raw.alarm_sound)
+        mp.start()
         Toast.makeText(
             LocalContext.current,
             "Timer finished!",
@@ -63,7 +66,7 @@ fun TimerScreen(  onBackClicked: () -> Unit, notesViewModel: NotesViewModel = vi
         Box(
             modifier = Modifier
                 .padding(start = 140.dp)
-                .background(Color.White)
+                .background(MaterialTheme.colorScheme.background)
                 .clickable {
                     // Start or stop the timer on click
                     isTimerRunning = !isTimerRunning
